@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StoreASP.Models.PostavkaProduct>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KolVo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPostavkaNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProductNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KolVo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPostavkaNavigation.IdPostavka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProductNavigation.IdProduct)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
