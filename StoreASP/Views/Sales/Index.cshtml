@@ -24,9 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdClientNavigation)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdDiscountNavigation)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,9 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdClientNavigation.FioClient)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDiscountNavigation.NazvanieSkidki)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdSale">Edit</a> |

@@ -7,11 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<storeContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddSingleton<Log>();
-builder.Services.AddSingleton<CustomExceptionAttribute>();
-builder.Services.AddMvc().AddMvcOptions(options => {
-    options.Filters.AddService<CustomExceptionAttribute>();
-});
+// builder.Services.AddSingleton<Log>();
+// builder.Services.AddSingleton<CustomExceptionAttribute>();
+// builder.Services.AddMvc().AddMvcOptions(options => {
+//     options.Filters.AddService<CustomExceptionAttribute>();
+// });
 
 var app = builder.Build();
 

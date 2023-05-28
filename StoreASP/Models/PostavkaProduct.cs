@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace StoreASP.Models
 {
     public partial class PostavkaProduct
     {
-        public decimal IdPostavka { get; set; }
-        public decimal IdProduct { get; set; }
-        public decimal KolVo { get; set; }
+        [DisplayName("Delivery's id")]
+        public long IdPostavka { get; set; }
+        
+        [DisplayName("Product's id")]
+        public long IdProduct { get; set; }
+        
+        [DisplayName("Amount")]
+        public long KolVo { get; set; }
 
+        [DisplayName("Delivery")]
         public virtual Postavka IdPostavkaNavigation { get; set; } = null!;
+        
+        [DisplayName("Product")]
         public virtual Product IdProductNavigation { get; set; } = null!;
     }
 }

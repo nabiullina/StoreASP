@@ -21,12 +21,12 @@ namespace StoreASP.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            var storeContext = _context.Sales.Include(s => s.IdClientNavigation).Include(s => s.IdDiscountNavigation);
+            var storeContext = _context.Sales.Include(s => s.IdClientNavigation);
             return View(await storeContext.ToListAsync());
         }
 
         // GET: Sales/Details/5
-        public async Task<IActionResult> Details(decimal? id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Sales == null)
             {
@@ -35,7 +35,6 @@ namespace StoreASP.Controllers
 
             var sale = await _context.Sales
                 .Include(s => s.IdClientNavigation)
-                .Include(s => s.IdDiscountNavigation)
                 .FirstOrDefaultAsync(m => m.IdSale == id);
             if (sale == null)
             {
@@ -49,7 +48,6 @@ namespace StoreASP.Controllers
         public IActionResult Create()
         {
             ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "FioClient");
-            ViewData["IdDiscount"] = new SelectList(_context.Discounts, "IdDiscount", "NazvanieSkidki");
             return View();
         }
 
@@ -67,12 +65,11 @@ namespace StoreASP.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
-            ViewData["IdDiscount"] = new SelectList(_context.Discounts, "IdDiscount", "IdDiscount", sale.IdDiscount);
             return View(sale);
         }
 
         // GET: Sales/Edit/5
-        public async Task<IActionResult> Edit(decimal? id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.Sales == null)
             {
@@ -85,7 +82,6 @@ namespace StoreASP.Controllers
                 return NotFound();
             }
             ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
-            ViewData["IdDiscount"] = new SelectList(_context.Discounts, "IdDiscount", "IdDiscount", sale.IdDiscount);
             return View(sale);
         }
 
@@ -94,7 +90,7 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("IdSale,DataS,Oplata,Itogo,IdClient,IdDiscount")] Sale sale)
+        public async Task<IActionResult> Edit(long id, [Bind("IdSale,DataS,Oplata,Itogo,IdClient,IdDiscount")] Sale sale)
         {
             if (id != sale.IdSale)
             {
@@ -122,12 +118,11 @@ namespace StoreASP.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
-            ViewData["IdDiscount"] = new SelectList(_context.Discounts, "IdDiscount", "IdDiscount", sale.IdDiscount);
             return View(sale);
         }
 
         // GET: Sales/Delete/5
-        public async Task<IActionResult> Delete(decimal? id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Sales == null)
             {
@@ -136,7 +131,6 @@ namespace StoreASP.Controllers
 
             var sale = await _context.Sales
                 .Include(s => s.IdClientNavigation)
-                .Include(s => s.IdDiscountNavigation)
                 .FirstOrDefaultAsync(m => m.IdSale == id);
             if (sale == null)
             {
@@ -149,7 +143,7 @@ namespace StoreASP.Controllers
         // POST: Sales/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(decimal id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             if (_context.Sales == null)
             {
@@ -165,7 +159,7 @@ namespace StoreASP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SaleExists(decimal id)
+        private bool SaleExists(long id)
         {
           return (_context.Sales?.Any(e => e.IdSale == id)).GetValueOrDefault();
         }

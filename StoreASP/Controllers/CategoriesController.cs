@@ -27,7 +27,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(decimal? id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Categories == null)
             {
@@ -67,7 +67,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(decimal? id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.Categories == null)
             {
@@ -87,7 +87,7 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("IdCategory,NazvanieCategory")] Category category)
+        public async Task<IActionResult> Edit(long id, [Bind("IdCategory,NazvanieCategory")] Category category)
         {
             if (id != category.IdCategory)
             {
@@ -118,7 +118,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(decimal? id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Categories == null)
             {
@@ -138,7 +138,7 @@ namespace StoreASP.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(decimal id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             if (_context.Categories == null)
             {
@@ -154,7 +154,7 @@ namespace StoreASP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(decimal id)
+        private bool CategoryExists(long id)
         {
           return (_context.Categories?.Any(e => e.IdCategory == id)).GetValueOrDefault();
         }

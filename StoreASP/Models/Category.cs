@@ -10,7 +10,7 @@ namespace StoreASP.Models
             Products = new HashSet<Product>();
         }
 
-        public decimal IdCategory { get; set; }
+        public long IdCategory { get; set; }
         public string NazvanieCategory { get; set; } = null!;
 
         public virtual ICollection<Product> Products { get; set; }

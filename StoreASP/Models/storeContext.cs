@@ -18,7 +18,6 @@ namespace StoreASP.Models
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Client> Clients { get; set; } = null!;
-        public virtual DbSet<Discount> Discounts { get; set; } = null!;
         public virtual DbSet<Mark> Marks { get; set; } = null!;
         public virtual DbSet<Postavka> Postavkas { get; set; } = null!;
         public virtual DbSet<PostavkaProduct> PostavkaProducts { get; set; } = null!;
@@ -46,7 +45,6 @@ namespace StoreASP.Models
                 entity.ToTable("category");
 
                 entity.Property(e => e.IdCategory)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_category");
 
                 entity.Property(e => e.NazvanieCategory)
@@ -63,7 +61,6 @@ namespace StoreASP.Models
                 entity.ToTable("client");
 
                 entity.Property(e => e.IdClient)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_client");
 
                 entity.Property(e => e.Email)
@@ -75,37 +72,10 @@ namespace StoreASP.Models
                     .IsUnicode(false)
                     .HasColumnName("FIO_client");
 
-                entity.Property(e => e.Number).HasColumnType("numeric(15, 0)");
+                entity.Property(e => e.Number);
             });
 
-            modelBuilder.Entity<Discount>(entity =>
-            {
-                entity.HasKey(e => e.IdDiscount)
-                    .HasName("PK__discount__60D3BFBCAF544587");
-
-                entity.ToTable("discount");
-
-                entity.Property(e => e.IdDiscount)
-                    .HasColumnType("numeric(5, 0)")
-                    .HasColumnName("Id_discount");
-
-                entity.Property(e => e.DataEnd)
-                    .HasColumnType("datetime")
-                    .HasColumnName("Data_end");
-
-                entity.Property(e => e.DataStart)
-                    .HasColumnType("datetime")
-                    .HasColumnName("Data_start");
-
-                entity.Property(e => e.DiscountSum)
-                    .HasColumnType("numeric(4, 0)")
-                    .HasColumnName("Discount_sum");
-
-                entity.Property(e => e.NazvanieSkidki)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("Nazvanie_skidki");
-            });
+           
 
             modelBuilder.Entity<Mark>(entity =>
             {
@@ -115,7 +85,6 @@ namespace StoreASP.Models
                 entity.ToTable("mark");
 
                 entity.Property(e => e.IdMark)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_mark");
 
                 entity.Property(e => e.NazvanieMark)
@@ -132,7 +101,6 @@ namespace StoreASP.Models
                 entity.ToTable("postavka");
 
                 entity.Property(e => e.IdPostavka)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_postavka");
 
                 entity.Property(e => e.CostZakupki)
@@ -145,7 +113,6 @@ namespace StoreASP.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.IdProvider)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_provider");
 
                 entity.Property(e => e.StatusPostavka)
@@ -167,15 +134,12 @@ namespace StoreASP.Models
                 entity.ToTable("postavka_product");
 
                 entity.Property(e => e.IdPostavka)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_postavka");
 
                 entity.Property(e => e.IdProduct)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_product");
 
                 entity.Property(e => e.KolVo)
-                    .HasColumnType("numeric(4, 0)")
                     .HasColumnName("Kol_vo");
 
                 entity.HasOne(d => d.IdPostavkaNavigation)
@@ -199,7 +163,6 @@ namespace StoreASP.Models
                 entity.ToTable("pprovider");
 
                 entity.Property(e => e.IdProvider)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_provider");
 
                 entity.Property(e => e.Adress)
@@ -215,7 +178,7 @@ namespace StoreASP.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Number).HasColumnType("numeric(15, 0)");
+                entity.Property(e => e.Number);
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -226,10 +189,10 @@ namespace StoreASP.Models
                 entity.ToTable("product");
 
                 entity.HasIndex(e => e.Imei, "UQ__product__8DF371FD259D8880")
+                    
                     .IsUnique();
 
                 entity.Property(e => e.IdProduct)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_product");
 
                 entity.Property(e => e.CostSales)
@@ -239,15 +202,13 @@ namespace StoreASP.Models
                 entity.Property(e => e.Foto).HasColumnType("text");
 
                 entity.Property(e => e.IdCategory)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_category");
 
                 entity.Property(e => e.IdMark)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_mark");
 
                 entity.Property(e => e.Imei)
-                    .HasColumnType("numeric(15, 0)")
+                    .HasColumnType("numeric(15)")
                     .HasColumnName("IMEI");
 
                 entity.Property(e => e.NazvanieProduct)
@@ -276,15 +237,12 @@ namespace StoreASP.Models
                 entity.ToTable("product_sale");
 
                 entity.Property(e => e.IdProduct)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_product");
 
                 entity.Property(e => e.IdSale)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_sale");
 
                 entity.Property(e => e.KolVo2)
-                    .HasColumnType("numeric(4, 0)")
                     .HasColumnName("Kol_vo2");
 
                 entity.HasOne(d => d.IdProductNavigation)
@@ -308,7 +266,6 @@ namespace StoreASP.Models
                 entity.ToTable("sale");
 
                 entity.Property(e => e.IdSale)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_sale");
 
                 entity.Property(e => e.DataS)
@@ -316,13 +273,8 @@ namespace StoreASP.Models
                     .HasColumnName("Data_s");
 
                 entity.Property(e => e.IdClient)
-                    .HasColumnType("numeric(5, 0)")
                     .HasColumnName("Id_client");
-
-                entity.Property(e => e.IdDiscount)
-                    .HasColumnType("numeric(5, 0)")
-                    .HasColumnName("Id_discount");
-
+                
                 entity.Property(e => e.Itogo).HasColumnType("numeric(10, 0)");
 
                 entity.Property(e => e.Oplata)
@@ -333,11 +285,6 @@ namespace StoreASP.Models
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.IdClient)
                     .HasConstraintName("fk_client");
-
-                entity.HasOne(d => d.IdDiscountNavigation)
-                    .WithMany(p => p.Sales)
-                    .HasForeignKey(d => d.IdDiscount)
-                    .HasConstraintName("fk_disc");
             });
 
             OnModelCreatingPartial(modelBuilder);

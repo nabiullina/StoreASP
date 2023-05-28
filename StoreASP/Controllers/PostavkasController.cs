@@ -26,7 +26,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Postavkas/Details/5
-        public async Task<IActionResult> Details(decimal? id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Postavkas == null)
             {
@@ -69,7 +69,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Postavkas/Edit/5
-        public async Task<IActionResult> Edit(decimal? id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.Postavkas == null)
             {
@@ -90,7 +90,7 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("IdPostavka,DataPostavka,CostZakupki,StatusPostavka,IdProvider")] Postavka postavka)
+        public async Task<IActionResult> Edit(long id, [Bind("IdPostavka,DataPostavka,CostZakupki,StatusPostavka,IdProvider")] Postavka postavka)
         {
             if (id != postavka.IdPostavka)
             {
@@ -122,7 +122,7 @@ namespace StoreASP.Controllers
         }
 
         // GET: Postavkas/Delete/5
-        public async Task<IActionResult> Delete(decimal? id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Postavkas == null)
             {
@@ -143,7 +143,7 @@ namespace StoreASP.Controllers
         // POST: Postavkas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(decimal id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             if (_context.Postavkas == null)
             {
@@ -159,7 +159,7 @@ namespace StoreASP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PostavkaExists(decimal id)
+        private bool PostavkaExists(long id)
         {
           return (_context.Postavkas?.Any(e => e.IdPostavka == id)).GetValueOrDefault();
         }
