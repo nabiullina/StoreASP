@@ -196,7 +196,7 @@ namespace StoreASP.Models
                     .HasColumnName("Id_product");
 
                 entity.Property(e => e.CostSales)
-                    .HasColumnType("numeric(6, 0)")
+                    .HasColumnType("numeric(20)")
                     .HasColumnName("Cost_sales");
 
                 entity.Property(e => e.Foto).HasColumnType("text");

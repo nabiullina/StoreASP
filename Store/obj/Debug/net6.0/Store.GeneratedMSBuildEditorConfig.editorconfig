@@ -44,10 +44,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/source/repos/ASP/Store/Store/Views/Clients/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50c1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/source/repos/ASP/Store/Store/Views/Clients/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,10 +66,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/source/repos/ASP/Store/Store/Views/Marks/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFya3NcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/source/repos/ASP/Store/Store/Views/Marks/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFya3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/source/repos/ASP/Store/Store/Views/Marks/Edit.cshtml]
@@ -192,12 +184,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/source/repos/ASP/Store/Store/Views/Sales/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/source/repos/ASP/Store/Store/Views/Sales/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/ASP/Store/Store/Views/Sales/GetClientSales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNcR2V0Q2xpZW50U2FsZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/source/repos/ASP/Store/Store/Views/Sales/Index.cshtml]

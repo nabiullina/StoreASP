@@ -16,9 +16,9 @@ namespace StoreASP.Models
         public long KolVo2 { get; set; }
 
         [DisplayName("Product")]
-        public virtual Product IdProductNavigation { get; set; } = null!;
+        public virtual Product? IdProductNavigation { get; set; } = null!;
         
         [DisplayName("Sale")]
-        public virtual Sale IdSaleNavigation { get; set; } = null!;
+        public virtual Sale? IdSaleNavigation { get; set; } = null!;
     }
 }

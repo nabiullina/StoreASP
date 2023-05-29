@@ -18,37 +18,27 @@ namespace StoreASP.Controllers
             _context = context;
         }
 
+        [Route("Sales/GetClientSales/{cliId}")]
+        public async Task<IActionResult> GetClientSales(long cliId)
+        {
+            var deliveries = await _context.Sales.Include("ProductSales.IdProductNavigation").Where(s => s.IdClient == cliId).ToListAsync();
+            ViewBag.cliid = cliId;
+            return View(deliveries);
+        }
+
+        
         // GET: Sales
         public async Task<IActionResult> Index()
         {
             var storeContext = _context.Sales.Include(s => s.IdClientNavigation);
             return View(await storeContext.ToListAsync());
         }
-
-        // GET: Sales/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null || _context.Sales == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sales
-                .Include(s => s.IdClientNavigation)
-                .FirstOrDefaultAsync(m => m.IdSale == id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-
-            return View(sale);
-        }
-
+    
         // GET: Sales/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(long clientId)
         {
-            ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "FioClient");
-            return View();
+            var sale = new Sale { IdClient = clientId, IdClientNavigation = await _context.Clients.FindAsync(clientId) };
+            return View(sale);
         }
 
         // POST: Sales/Create
@@ -56,32 +46,33 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSale,DataS,Oplata,Itogo,IdClient,IdDiscount")] Sale sale)
+        public async Task<IActionResult> Create(long clientId, [Bind("IdSale,DataS,Oplata,Itogo,IdDiscount")] Sale sale)
         {
+            sale.IdClient = clientId;
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetClientSales), new{cliId=clientId});
             }
-            ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
             return View(sale);
         }
 
         // GET: Sales/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        [Route("Sales/Edit/{saleId}/{cliId}")]
+        public async Task<IActionResult> Edit(long saleId, long cliId)
         {
-            if (id == null || _context.Sales == null)
+            if (saleId == null || cliId == null || _context.Sales == null)
             {
                 return NotFound();
             }
 
-            var sale = await _context.Sales.FindAsync(id);
+            var sale = await _context.Sales.Include("ProductSales.IdProductNavigation").Where(s=>s.IdSale==saleId).FirstOrDefaultAsync();
             if (sale == null)
             {
                 return NotFound();
             }
-            ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
+            // ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
             return View(sale);
         }
 
@@ -90,9 +81,11 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("IdSale,DataS,Oplata,Itogo,IdClient,IdDiscount")] Sale sale)
+        [Route("Sales/Edit/{saleId}/{cliId}")]
+        public async Task<IActionResult> Edit(long saleId, long cliId, [Bind("IdSale,DataS,Oplata,Itogo,IdDiscount")] Sale sale)
         {
-            if (id != sale.IdSale)
+            sale.IdClient = cliId;
+            if (saleId != sale.IdSale)
             {
                 return NotFound();
             }
@@ -115,9 +108,8 @@ namespace StoreASP.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetClientSales), new{cliId});
             }
-            ViewData["IdClient"] = new SelectList(_context.Clients, "IdClient", "IdClient", sale.IdClient);
             return View(sale);
         }
 
@@ -156,7 +148,7 @@ namespace StoreASP.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetClientSales), new{cliid=sale.IdClient});
         }
 
         private bool SaleExists(long id)

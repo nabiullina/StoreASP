@@ -26,24 +26,6 @@ namespace StoreASP.Controllers
                           Problem("Entity set 'storeContext.Marks'  is null.");
         }
 
-        // GET: Marks/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null || _context.Marks == null)
-            {
-                return NotFound();
-            }
-
-            var mark = await _context.Marks
-                .FirstOrDefaultAsync(m => m.IdMark == id);
-            if (mark == null)
-            {
-                return NotFound();
-            }
-
-            return View(mark);
-        }
-
         // GET: Marks/Create
         public IActionResult Create()
         {

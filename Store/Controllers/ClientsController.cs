@@ -25,25 +25,7 @@ namespace StoreASP.Controllers
                           View(await _context.Clients.ToListAsync()) :
                           Problem("Entity set 'storeContext.Clients'  is null.");
         }
-
-        // GET: Clients/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null || _context.Clients == null)
-            {
-                return NotFound();
-            }
-
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.IdClient == id);
-            if (client == null)
-            {
-                return NotFound();
-            }
-
-            return View(client);
-        }
-
+        
         // GET: Clients/Create
         public IActionResult Create()
         {

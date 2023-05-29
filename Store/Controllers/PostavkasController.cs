@@ -17,7 +17,7 @@ namespace StoreASP.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Postavkas
         public async Task<IActionResult> Index()
         {

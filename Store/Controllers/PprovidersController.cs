@@ -25,24 +25,7 @@ namespace StoreASP.Controllers
                           View(await _context.Pproviders.ToListAsync()) :
                           Problem("Entity set 'storeContext.Pproviders'  is null.");
         }
-
-        // GET: Pproviders/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null || _context.Pproviders == null)
-            {
-                return NotFound();
-            }
-
-            var pprovider = await _context.Pproviders
-                .FirstOrDefaultAsync(m => m.IdProvider == id);
-            if (pprovider == null)
-            {
-                return NotFound();
-            }
-
-            return View(pprovider);
-        }
+        
 
         // GET: Pproviders/Create
         public IActionResult Create()
