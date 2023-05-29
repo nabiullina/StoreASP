@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace StoreASP.Models
 {
@@ -13,6 +14,7 @@ namespace StoreASP.Models
         public long IdSale { get; set; }
         
         [DisplayName("Amount")]
+        [Range(1, 10)]
         public long KolVo2 { get; set; }
 
         [DisplayName("Product")]

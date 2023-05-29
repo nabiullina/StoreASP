@@ -46,9 +46,10 @@ namespace StoreASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(long clientId, [Bind("IdSale,DataS,Oplata,Itogo,IdDiscount")] Sale sale)
+        public async Task<IActionResult> Create(long clientId, [Bind("IdSale,DataS,Oplata,IdDiscount")] Sale sale)
         {
             sale.IdClient = clientId;
+            sale.Itogo = 0;
             if (ModelState.IsValid)
             {
                 _context.Add(sale);

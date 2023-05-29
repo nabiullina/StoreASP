@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.IdClientNavigation.FioClient)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdSale">Edit</a> |
+                <a asp-action="Edit" asp-route-saleId="@item.IdSale" asp-route-cliId="@item.IdClient">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.IdSale">Delete</a>
             </td>
         </tr>

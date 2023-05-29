@@ -46,10 +46,20 @@ namespace StoreASP.Controllers
         }
 
         // GET: ProductSales/Create
-        public IActionResult Create(long saleId)
+        public async Task<IActionResult> Create(long saleId)
         {
             var productSale = new ProductSale { IdSale = saleId };
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "NazvanieProduct");
+            var orderedProducts = await _context.ProductSales.Where(ps => ps.IdSale == saleId).ToListAsync();
+            var sale = await _context.Sales.Include("ProductSales").Where(s=>s.IdSale==saleId).FirstOrDefaultAsync();
+            IEnumerable<Product> products = _context.Products;
+            foreach (var prod in orderedProducts)
+            {
+                if (sale.ProductSales.Contains(prod))
+                {
+                    products = products.Where(p => p.IdProduct != prod.IdProduct);
+                }
+            }
+            ViewData["IdProduct"] = new SelectList(products, "IdProduct", "NazvanieProduct");
             // ViewData["IdSale"] = new SelectList(_context.Sales, "IdSale", "IdSale");
             return View(productSale);
         }

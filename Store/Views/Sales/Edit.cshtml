@@ -20,7 +20,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Oplata" class="control-label"></label>
-                <input asp-for="Oplata" class="form-control" />
+                <select asp-for="Oplata" class="form-control">
+                    <option>Наличные</option>
+                    <option>Карта</option>
+                </select>
                 <span asp-validation-for="Oplata" class="text-danger"></span>
             </div>
             <div class="form-group">

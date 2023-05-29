@@ -48,8 +48,8 @@ namespace StoreASP.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["IdCategory"] = new SelectList(_context.Categories, "IdCategory", "IdCategory");
-            ViewData["IdMark"] = new SelectList(_context.Marks, "IdMark", "IdMark");
+            ViewData["IdCategory"] = new SelectList(_context.Categories, "IdCategory", "NazvanieCategory");
+            ViewData["IdMark"] = new SelectList(_context.Marks, "IdMark", "NazvanieMark");
             return View();
         }
 
@@ -84,8 +84,8 @@ namespace StoreASP.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCategory"] = new SelectList(_context.Categories, "IdCategory", "IdCategory", product.IdCategory);
-            ViewData["IdMark"] = new SelectList(_context.Marks, "IdMark", "IdMark", product.IdMark);
+            ViewData["IdCategory"] = new SelectList(_context.Categories, "IdCategory", "NazvanieCategory", product.IdCategory);
+            ViewData["IdMark"] = new SelectList(_context.Marks, "IdMark", "NazvanieMark", product.IdMark);
             return View(product);
         }
 
